@@ -202,22 +202,21 @@ After training, the following models are available:
 
 ## Results Summary
 
-Our novel pretraining strategy achieves:
+### COMPREHENSIVE AUC COMPARISON: BEFORE vs AFTER PRETRAINING
 
-COMPREHENSIVE AUC COMPARISON: BEFORE vs AFTER PRETRAINING
-================================================================================
+| **Dataset**    | **Before Pretraining** | **After Pretraining** | **Improvement** | **% Change** |
+|----------------|------------------------|------------------------|------------------|--------------|
+| Training Set   | 0.5427                 | 0.6305                 | +0.0878          | +16.18%      |
+| Test Set       | 0.5423                 | 0.6163                 | +0.0740          | +13.64%      |
+| **Average**    | –                      | –                      | **+0.0809**      | **+14.91%**  |
 
-Dataset         Before Pretraining   After Pretraining    Improvement     % Change  
---------------------------------------------------------------------------------
-Training Set    0.5427               0.6305               +0.0878         +16.18    %
-Test Set        0.5423               0.6163               +0.0740         +13.64    %
---------------------------------------------------------------------------------
-Average         -                    -                    +0.0809         +14.91    %
+---
 
-SUMMARY:
-Training Set Improvement: +0.0878 (+16.18%)
-Test Set Improvement:     +0.0740 (+13.64%)
-Average Improvement:      +0.0809 (+14.91%)
+**Summary**  
+- **Training Set Improvement:** +0.0878 (**+16.18%**)  
+- **Test Set Improvement:**     +0.0740 (**+13.64%**)  
+- **Average Improvement:**      +0.0809 (**+14.91%**)
+
 
 **Key Achievement**: 9.96% AUC improvement demonstrates successful transfer learning for biological sequence classification.
 
