@@ -5,9 +5,9 @@ This project implements a transformer-based model with a novel pretraining strat
 ## Project Structure
 
 ```
-tcr_antigen_prediction/
-├── data/                   # Data files (train.csv, test.csv)
-├── src/                    # Source code directory
+src/                       # directory that contains everything to execute the code except model
+├── data/                  # Data files (train.csv, test.csv)
+├── business_logic/        # Business logic directory
 │   ├── data_loader.py     # Data preprocessing and tokenization
 │   ├── model.py           # Transformer model implementation
 │   ├── pretraining.py     # Novel pretraining strategies
@@ -143,9 +143,8 @@ Create a CSV file with your TCR and antigen sequences. The file must have these 
 
 ```csv
 antigen,TCR,interaction
-NLVPMVATV,CSALSGNQNYNEQFF,1
-TQGYFPDWQNY,CASSYMGQAPYGYTF,0
-KLGGALQAK,CASSHQTGDLSYEQYF,0
+ALSPVIPLI,CAISETGGGQPQHF,1
+LPRRSGAAGA,CASSVGNIQYF,0
 ```
 
 **Important Notes:**
@@ -167,7 +166,7 @@ The output file `results.csv` will contain:
 
 ```csv
 antigen,TCR,true_interaction,predicted_interaction,no_interaction_prob,interaction_prob,model_used,confidence
-AARAVFLAL,CASSYSTGDEQYF,1,0,0.54212874,0.45787126,Pretrained,Medium
+ALSPVIPLI,CAISETGGGQPQHF,1,1,0.25584272,0.74415725,Pretrained,High
 
 **Result Columns:**
 - `predicted_interaction`: **1** = Binding predicted, **0** = No binding predicted
@@ -201,6 +200,71 @@ After training, the following models are available:
 - `models/pretrained_model_final.pt`: Raw pretrained model weights
 
 ## Results Summary
+
+This document summarizes the test data and results from our TCR-antigen interaction prediction model, comparing performance **before** and **after** pretraining.
+
+---
+
+## Test Dataset
+
+These are the antigen–TCR pairs used for evaluation:
+
+| **Antigen**   | **TCR**                 | **Interaction** |
+|---------------|--------------------------|------------------|
+| AARAVFLAL     | CASSYSTGDEQYF            | 1                |
+| ALSPVIPLI     | CAISETGGGQPQHF           | 1                |
+| EAAGIGILTV    | CASSLEGAVLEAEAF          | 1                |
+| EAAGIGILTV    | CASSVDAGGAGELF           | 1                |
+| EAAGIGILTV    | CASSVGGLAIGELF           | 1                |
+| EAAGIGILTV    | CASSVGQAAEAF             | 1                |
+| ELAGIGILTV    | CASSQDGGTSGGGQI          | 1                |
+| GILGFVFTL     | CSARDGGRVFSEKLFF         | 0                |
+| GILGFVFTL     | CASSQLTSGTGQYF           | 0                |
+| GILGFVFTL     | CASSFMGAKNIQYF           | 0                |
+| LPRRSGAAGA    | CASSVGNIQYF              | 0                |
+| LLWNGPMAV     | CAGLAGNEQFF              | 1                |
+
+---
+
+## Results (Without Pretraining)
+
+Model predictions using the baseline (non-pretrained) model:
+
+| **Antigen**   | **TCR**              | **True** | **Predicted** | **No-Interaction Prob** | **Interaction Prob** | **Model**   | **Confidence** |
+|---------------|-----------------------|----------|----------------|--------------------------|----------------------|-------------|----------------|
+| ALSPVIPLI     | CAISETGGGQPQHF        | 1        | 0              | 0.50929                  | 0.49071              | Baseline    | Medium         |
+| EAAGIGILTV    | CASSLEGAVLEAEAF       | 1        | 0              | 0.50910                  | 0.49090              | Baseline    | Medium         |
+| EAAGIGILTV    | CASSVDAGGAGELF        | 1        | 0              | 0.50933                  | 0.49067              | Baseline    | Medium         |
+| EAAGIGILTV    | CASSVGGLAIGELF        | 1        | 0              | 0.50908                  | 0.49092              | Baseline    | Medium         |
+| EAAGIGILTV    | CASSVGQAAEAF          | 1        | 0              | 0.50910                  | 0.49090              | Baseline    | Medium         |
+| ELAGIGILTV    | CASSQDGGTSGGGQI       | 1        | 0              | 0.50919                  | 0.49081              | Baseline    | Medium         |
+| GILGFVFTL     | CSARDGGRVFSEKLFF      | 0        | 0              | 0.50928                  | 0.49072              | Baseline    | Medium         |
+| GILGFVFTL     | CASSQLTSGTGQYF        | 0        | 0              | 0.50911                  | 0.49089              | Baseline    | Medium         |
+| GILGFVFTL     | CASSFMGAKNIQYF        | 0        | 0              | 0.50918                  | 0.49082              | Baseline    | Medium         |
+| LPRRSGAAGA    | CASSVGNIQYF           | 0        | 0              | 0.50907                  | 0.49093              | Baseline    | Medium         |
+| LLWNGPMAV     | CAGLAGNEQFF           | 1        | 1              | 0.49347                  | 0.50653              | Baseline    | Medium         |
+
+---
+
+## Results (After Pretraining)
+
+Model predictions using the pretrained model:
+
+| **Antigen**   | **TCR**              | **True** | **Predicted** | **No-Interaction Prob** | **Interaction Prob** | **Model**    | **Confidence** |
+|---------------|-----------------------|----------|----------------|--------------------------|----------------------|--------------|----------------|
+| ALSPVIPLI     | CAISETGGGQPQHF        | 1        | 1              | 0.25584                  | 0.74416              | Pretrained   | High           |
+| EAAGIGILTV    | CASSLEGAVLEAEAF       | 1        | 1              | 0.23335                  | 0.76665              | Pretrained   | High           |
+| EAAGIGILTV    | CASSVDAGGAGELF        | 1        | 1              | 0.27545                  | 0.72455              | Pretrained   | High           |
+| EAAGIGILTV    | CASSVGGLAIGELF        | 1        | 1              | 0.15048                  | 0.84952              | Pretrained   | High           |
+| EAAGIGILTV    | CASSVGQAAEAF          | 1        | 1              | 0.23432                  | 0.76568              | Pretrained   | High           |
+| ELAGIGILTV    | CASSQDGGTSGGGQI       | 1        | 1              | 0.00038                  | 0.99962              | Pretrained   | High           |
+| GILGFVFTL     | CSARDGGRVFSEKLFF      | 0        | 0              | 0.68782                  | 0.31218              | Pretrained   | Medium         |
+| GILGFVFTL     | CASSQLTSGTGQYF        | 0        | 0              | 0.53396                  | 0.46604              | Pretrained   | Medium         |
+| GILGFVFTL     | CASSFMGAKNIQYF        | 0        | 1              | 0.40255                  | 0.59745              | Pretrained   | Medium         |
+| LPRRSGAAGA    | CASSVGNIQYF           | 0        | 0              | 0.56021                  | 0.43979              | Pretrained   | Medium         |
+| LLWNGPMAV     | CAGLAGNEQFF           | 1        | 1              | 0.46520                  | 0.53480              | Pretrained   | Medium         |
+
+---
 
 ### COMPREHENSIVE AUC COMPARISON: BEFORE vs AFTER PRETRAINING
 
