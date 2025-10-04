@@ -115,7 +115,7 @@ Selected a **multi-task learning framework** to pretrain our model on TCR–anti
 </details>
 
 
-## Codebase Description
+# Codebase Description
 
 ### Core Components
 
@@ -148,7 +148,7 @@ Selected a **multi-task learning framework** to pretrain our model on TCR–anti
    - Model comparison and improvement analysis
    - Detailed prediction reports and visualizations
 
-## Installation and Setup
+# Installation and Setup
 
 ### 1. Install Dependencies
 ```bash
@@ -168,7 +168,7 @@ NLVPMVATV,CASSPVTGGIYGYTF,1
 NLVPMVATV,CASRPDGRETQYF,0
 ```
 
-## Usage Instructions
+# Usage Instructions
 
 ### Complete Training Pipeline
 Run the full pipeline including pretraining, baseline training, and evaluation:
@@ -230,7 +230,7 @@ python visualize_roc.py --baseline_model models/baseline_model_best.pt --pretrai
 python predict.py --model pretrained --data new_sequences.csv --output new_predictions.csv
 ```
 
-## 🚀 **Quick Start: Using Pretrained Model with Your Data**
+# **Quick Start: Using Pretrained Model with Your Data**
 
 ### Step 1: Prepare Your Input Data
 
@@ -276,20 +276,20 @@ python3 predict.py --model baseline --data data/example_new_data.csv --output da
 
 ```
 
-### Model Performance
+# Model Performance
 
 ** Recommended: Use Pretrained Model**
 - **AUC**: 0.6163 (vs 0.5423 baseline) - **+13.64% improvement**
 - **Recall**: 71% improvement in detecting true interactions
 - **Best for**: Real-world TCR-antigen interaction screening
 
-### Available Model Files
+# Available Model Files
 After training, the following models are available:
 - `models/baseline_model_best.pt`: Baseline transformer (no pretraining)
 - `models/finetuned_model_best.pt`: **Pretrained + fine-tuned transformer (RECOMMENDED)**
 - `models/pretrained_model_final.pt`: Raw pretrained model weights
 
-## Results Summary
+# Results Summary
 
 This document summarizes the test data and results from our TCR-antigen interaction prediction model, comparing performance **before** and **after** pretraining.
 
@@ -356,7 +356,7 @@ Model predictions using the pretrained model:
 
 ---
 
-### COMPREHENSIVE AUC COMPARISON: BEFORE vs AFTER PRETRAINING
+# COMPREHENSIVE AUC COMPARISON: BEFORE vs AFTER PRETRAINING
 
 | **Dataset**    | **Before Pretraining** | **After Pretraining** | **Improvement** | **% Change** |
 |----------------|------------------------|------------------------|------------------|--------------|
@@ -366,7 +366,7 @@ Model predictions using the pretrained model:
 
 ---
 
-**Summary**  
+**Conclusion**  
 - **Training Set Improvement:** +0.0878 (**+16.18%**)  
 - **Test Set Improvement:**     +0.0740 (**+13.64%**)  
 - **Average Improvement:**      +0.0809 (**+14.91%**)
@@ -374,7 +374,7 @@ Model predictions using the pretrained model:
 
 **Key Achievement**: 9.96% AUC improvement demonstrates successful transfer learning for biological sequence classification.
 
-## Technical Specifications
+# Technical Specifications
 
 - **Model Architecture**: 6-layer Transformer encoder
 - **Vocabulary**: 25 tokens (20 amino acids + 5 special tokens)
@@ -382,7 +382,7 @@ Model predictions using the pretrained model:
 - **Training Time**: ~3-5 hours for complete pipeline
 - **Memory Requirements**: ~8GB GPU memory
 
-## File Descriptions
+# File Descriptions
 
 ### Source Code (`src/`)
 - `data_loader.py`: Dataset classes and data preprocessing utilities
@@ -392,7 +392,7 @@ Model predictions using the pretrained model:
 - `evaluation.py`: Performance metrics and model comparison tools
 
 
-## 🛠️ **Troubleshooting & FAQ**
+# **Troubleshooting & FAQ**
 
 ### Common Issues
 
