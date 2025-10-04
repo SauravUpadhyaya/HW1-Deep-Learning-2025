@@ -173,18 +173,6 @@ ALSPVIPLI,CAISETGGGQPQHF,1,1,0.25584272,0.74415725,Pretrained,High
 - `interaction_prob`: Probability score (0.0 to 1.0, higher = more likely to interact)
 - `confidence`: **High** (>=0.7), **Medium** (0.6-0.4), **Low** (<=0.3)
 
-### Example Usage
-
-```bash
-# Example 1: Basic prediction
-python predict.py --model pretrained --data my_tcr_antigen_pairs.csv --output my_results.csv
-
-# Example 2: If you have true labels and want to evaluate performance
-python predict.py --model pretrained --data labeled_data.csv --evaluate --output evaluated_results.csv
-
-# Example 3: Compare baseline vs pretrained models (requires true labels)
-python predict.py --model both --data test_data.csv --evaluate --plot_roc
-```
 
 ### Model Performance
 
