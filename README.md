@@ -173,7 +173,9 @@ ALSPVIPLI,CAISETGGGQPQHF,1,1,0.25584272,0.74415725,Pretrained,High
 - `interaction_prob`: Probability score (0.0 to 1.0, higher = more likely to interact)
 - `confidence`: **High** (>=0.7), **Medium** (0.6-0.4), **Low** (<=0.3)
 
-
+ 
+ ---
+ 
 ### Model Performance
 
 ** Recommended: Use Pretrained Model**
