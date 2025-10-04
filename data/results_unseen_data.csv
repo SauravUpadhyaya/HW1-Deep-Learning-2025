@@ -1,0 +1,2 @@
+antigen,TCR,true_interaction,predicted_interaction,no_interaction_prob,interaction_prob,model_used,confidence
+AARAVFLAL,CASSYSTGDEQYF,1,0,0.54212874,0.45787126,Pretrained,Medium
