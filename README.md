@@ -19,6 +19,98 @@ src/                       # directory that contains everything to execute the c
 ├── predict.py            # Inference script for trained models
 └── requirements.txt      # Python dependencies
 ```
+# 🧠 Pretraining Strategy Design
+
+We employ a **multi-task learning framework** to pretrain our model on TCR–antigen amino acid sequences. 
+
+---
+
+##  Multi-Task Framework
+
+**Architecture Overview:**
+
+- **Input:** TCR + Antigen amino acid sequences
+- **Encoder:** 6-layer Transformer  
+  - 8 attention heads  
+  - 256 hidden dimensions
+- **Tasks & Weights:**
+  -  **Masked Sequence Modeling (MSM):** 40%
+  -  **Contrastive Sequence Learning (CSL):** 35%
+  -  **Sequence Order Prediction (SOP):** 25%
+- **Output:** Combined weighted loss from all three tasks
+
+---
+
+## ⚙️ Technical Analysis of Pretraining Tasks
+
+<details>
+<summary><strong>1. Masked Sequence Modeling (MSM) – 40% Weight</strong></summary>
+
+**Technical Implementation:**
+- Randomly mask 15% of amino acid tokens
+- Predict masked tokens using a softmax layer over a 20-class amino acid vocabulary
+
+**Loss Function:**
+- Cross-entropy loss:  
+  `L_MSM = -∑ log P(aᵢ | context)`
+
+**Biological Justification:**
+- Encourages the model to learn amino acid co-occurrence patterns
+- Especially effective in capturing functional motifs in CDR regions and epitope hotspots
+
+**Technical Advantage:**
+- Captures **local sequence patterns** (e.g., aromatic residues in binding pockets)
+
+**Expected Learning:**
+- Context-aware amino acid embeddings that reflect **functional and structural constraints**
+
+</details>
+
+---
+
+<details>
+<summary><strong>2. Contrastive Sequence Learning (CSL) – 35% Weight</strong></summary>
+
+**Technical Implementation:**
+- Employ InfoNCE loss
+- Create positive pairs (same sequence in different views) and negative pairs (different sequences)
+
+**Loss Function:**
+- `L_CSL = -log( exp(sim(zᵢ, zⱼ)/τ) / ∑ exp(sim(zᵢ, zₖ)/τ) )`
+
+**Biological Justification:**
+- TCR-antigen interactions depend on **global sequence compatibility**, not just local motifs
+
+**Technical Advantage:**
+- Learns **discriminative global representations** that differentiate compatible vs incompatible pairs
+
+**Expected Learning:**
+- Sequence-level embeddings aligned with **binding affinity patterns**
+
+</details>
+
+---
+
+<details>
+<summary><strong>3. Sequence Order Prediction (SOP) – 25% Weight</strong></summary>
+
+**Technical Implementation:**
+- Binary classification: Determine if two sequence segments are in biologically correct order
+
+**Loss Function:**
+- `L_SOP = -[y·log(σ(h)) + (1−y)·log(1−σ(h))]`
+
+**Biological Justification:**
+- Protein folding and binding depend on **sequential order and spatial structure**
+
+**Technical Advantage:**
+- Encourages the model to learn **positional dependencies** critical for structural modeling
+
+**Expected Learning:**
+- Positional embeddings that reflect **sequence–structure alignment**
+
+</details>
+
 
 ## Codebase Description
 
