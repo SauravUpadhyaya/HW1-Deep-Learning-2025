@@ -139,7 +139,7 @@ python predict.py --model pretrained --data new_sequences.csv --output new_predi
 
 ### Step 1: Prepare Your Input Data
 
-Create a CSV file with your TCR and antigen sequences. The file must have these column names:
+Create a CSV file named example_new_data.csv with your TCR and antigen sequences. The file must have these column names:
 
 ```csv
 antigen,TCR,interaction
@@ -157,12 +157,12 @@ LPRRSGAAGA,CASSVGNIQYF,0
 
 ```bash
 # Use the best pretrained model for your predictions
-python predict.py --model pretrained --data your_data.csv --output results.csv
+python3 predict.py --model pretrained --data data/example_new_data.csv --output data/results_unseen_data.csv
 ```
 
 ### Step 3: Interpret Results
 
-The output file `results.csv` will contain:
+The output file `results_unseen_data.csv` will contain:
 
 ```csv
 antigen,TCR,true_interaction,predicted_interaction,no_interaction_prob,interaction_prob,model_used,confidence
@@ -173,9 +173,14 @@ ALSPVIPLI,CAISETGGGQPQHF,1,1,0.25584272,0.74415725,Pretrained,High
 - `interaction_prob`: Probability score (0.0 to 1.0, higher = more likely to interact)
 - `confidence`: **High** (>=0.7), **Medium** (0.6-0.4), **Low** (<=0.3)
 
- 
- ---
- 
+ ### Example Usage
+
+```bash
+# Example 1: Basic prediction
+python3 predict.py --model baseline --data data/example_new_data.csv --output data/results_unseen_data.csv
+
+```
+
 ### Model Performance
 
 ** Recommended: Use Pretrained Model**
