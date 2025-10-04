@@ -2,6 +2,9 @@
 
 This project implements a transformer-based model with a novel pretraining strategy for predicting T-cell receptor (TCR) and antigen interactions. The system demonstrates that domain-specific pretraining can improve biological sequence classification performance by **9.96% AUC improvement** over baseline models.
 
+**Key Innovation**: Three-task pretraining (Masked Sequence Modeling  + Contrastive Sequence Learning + Sequence Order Prediction) that learns biological patterns before seeing interaction labels.
+
+
 ## Project Structure
 
 ```
@@ -19,9 +22,9 @@ src/                       # directory that contains everything to execute the c
 ├── predict.py            # Inference script for trained models
 └── requirements.txt      # Python dependencies
 ```
-# 🧠 Pretraining Strategy Design
+# Pretraining Strategy Design
 
-We employ a **multi-task learning framework** to pretrain our model on TCR–antigen amino acid sequences. 
+Selected a **multi-task learning framework** to pretrain our model on TCR–antigen amino acid sequences. 
 
 ---
 
@@ -41,7 +44,7 @@ We employ a **multi-task learning framework** to pretrain our model on TCR–ant
 
 ---
 
-## ⚙️ Technical Analysis of Pretraining Tasks
+## Technical Analysis of Pretraining Tasks
 
 <details>
 <summary><strong>1. Masked Sequence Modeling (MSM) – 40% Weight</strong></summary>
@@ -413,14 +416,6 @@ ls models/
 export CUDA_VISIBLE_DEVICES=""
 python predict.py --model pretrained --data your_data.csv --output results.csv
 ```
-
-
-
-### Performance Tips
-
-1. **For best results**: Use sequences within typical length ranges (TCR: 10-20 aa, Antigen: 8-15 aa)
-2. **Batch processing**: The model can handle thousands of pairs efficiently
-3. **Confidence interpretation**: Focus on High/Medium confidence predictions for important decisions
 
 ### System Requirements
 
