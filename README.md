@@ -95,8 +95,8 @@ This will:
 #### Predict with Baseline Model (No Pretraining)
 
 Model link: 
-option 1: https://drive.google.com/file/d/1QPCOyRHwk9ZMRTHg-7lwsjLg5DBbq1_e/view?usp=sharing
-option 2: https://github.com/SauravUpadhyaya/HW1-Deep-Learning-2025/blob/main/models/baseline_model_best.pt
+- option 1: https://drive.google.com/file/d/1QPCOyRHwk9ZMRTHg-7lwsjLg5DBbq1_e/view?usp=sharing
+- option 2: https://github.com/SauravUpadhyaya/HW1-Deep-Learning-2025/blob/main/models/baseline_model_best.pt
 
 ```bash
 python3 predict.py --model baseline --data data/example_new_data.csv --output data/results_unseen_data.csv
@@ -106,8 +106,8 @@ python3 predict.py --model baseline --data data/example_new_data.csv --output da
 #### Predict with Pretrained Model
 
 Model link: 
-option 1: https://drive.google.com/file/d/1o91I9zXD-xiA-3LTcfIHf8rQ4dCrYf_A/view?usp=sharing
-option 2: https://github.com/SauravUpadhyaya/HW1-Deep-Learning-2025/blob/main/models/finetuned_model_best.pt
+- option 1: https://drive.google.com/file/d/1o91I9zXD-xiA-3LTcfIHf8rQ4dCrYf_A/view?usp=sharing
+- option 2: https://github.com/SauravUpadhyaya/HW1-Deep-Learning-2025/blob/main/models/finetuned_model_best.pt
 
 
 ```bash
